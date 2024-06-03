@@ -1,43 +1,44 @@
-import matplotlib
 import tkinter as tk
-import math
-import numpy
 from PIL import Image, ImageTk
 import calculator
 
-root = tk.Tk()
 
-def CalculatorFrame():
-    calculator.generate(root)
+class App(tk.Tk):
+    def __init__(self):
+        tk.Tk.__init__(self)
 
-def open_frame2():
-    frame2 = tk.Toplevel(root)
-    frame2.title("Frame 2")
-    frame2.geometry("300x300")
-    frame2_label = tk.Label(frame2, text="Frame 2")
-    frame2_label.pack()
-def open_frame3():
-    frame3 = tk.Toplevel(root)
-    frame3.title("Frame 3")
-    frame3.geometry("300x300")
-    frame3_label = tk.Label(frame3, text="Frame 3")
-    frame3_label.pack()
+        self.title("FM CALCULATOR")
+        self.configure(background="grey")
 
-root.title("Main Home")
-root.configure(background="grey")
+        self.buttons()
 
-calculate = Image.open('calculate.png')
-calculate = ImageTk.PhotoImage(calculate)
-notepad = Image.open('notepad.png')
-notepad = ImageTk.PhotoImage(notepad)
-functions = Image.open('functions.png')
-functions = ImageTk.PhotoImage(functions)
+        self.mainloop()
 
-CalculateFrameButton = tk.Button(root, image=calculate, command=CalculatorFrame, width=150, height=200)
-CalculateFrameButton.grid(row=0, column=0, padx=10, pady=10)
-NotepadFrameButton = tk.Button(root, image=notepad, command=open_frame2, width=150, height=200)
-NotepadFrameButton.grid(row=0, column=1, padx=0, pady=10)
-FunctionsFrameButton = tk.Button(root, image=functions, command=open_frame3, width=150, height=200)
-FunctionsFrameButton.grid(row=0, column=2, padx=10, pady=10)
+    def buttons(self):
+        calculate = Image.open('assets\\calculate.png')
+        calculate = ImageTk.PhotoImage(calculate)
+        notepad = Image.open('assets\\notepad.png')
+        notepad = ImageTk.PhotoImage(notepad)
+        functions = Image.open('assets\\functions.png')
+        functions = ImageTk.PhotoImage(functions)
 
-root.mainloop()
+        MenuButton(self, calculate, lambda: calculator.generate(self), 150, 200).grid(row=0, column=0, padx=10, pady=10)
+        MenuButton(self, notepad, lambda: calculator.generate(self), 150, 200).grid(row=0, column=1, padx=0, pady=10)
+        MenuButton(self, functions, lambda: calculator.generate(self), 150, 200).grid(row=0, column=2, padx=10, pady=10)
+
+
+class MenuButton(tk.Button):
+    def __init__(self, parent, image, command, width, height):
+        tk.Button.__init__(self, parent, image=image, command=command, width=width, height=height)
+        self.image = image
+        self.command = command
+        self.width = width
+        self.height = height
+
+class ButtonImage():
+    def __init__(self, image):
+        self.image = Image.open(image)
+        self.image = ImageTk.PhotoImage(self.image)
+
+
+App()

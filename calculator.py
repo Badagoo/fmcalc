@@ -1,17 +1,5 @@
 import tkinter as tk
 import math
-def click(event, screen):
-    text = event.widget.cget("text")
-    if text == "=":
-        try:
-            result = eval(screen.get())
-            screen.set(result)
-        except Exception as e:
-            screen.set("Error")
-    elif text == "C":
-        screen.set("")
-    else:
-        screen.set(screen.get() + text)
 
 def generate(root):
     CalculateWindow = tk.Toplevel(root)
@@ -35,12 +23,8 @@ def generate(root):
         'C', '0', '=', '+'
     ]
 
-    i = 0
-    for button in buttons:
+    for buttonnum, button in enumerate(buttons):
         btn = tk.Button(frame, text=button, font="Segoe 20")
-        btn.grid(row=math.floor(i / 4), column=i % 4)
-        btn.bind("<Button-1>", lambda e, screen=screen: click(e, screen))
-        i += 1
-        
+        btn.grid(row=math.floor(buttonnum / 4), column=buttonnum % 4)
     
     CalculateWindow.protocol("WM_DELETE_WINDOW", lambda: [CalculateWindow.destroy(), root.deiconify()])
