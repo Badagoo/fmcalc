@@ -2,43 +2,23 @@ import tkinter as tk
 from PIL import Image, ImageTk
 import calculator
 
+TITLE = "FM CALCULATOR"
+BGCHOICE = "grey"
 
 class App(tk.Tk):
     def __init__(self):
         tk.Tk.__init__(self)
 
-        self.title("FM CALCULATOR")
-        self.configure(background="grey")
-
-        self.buttons()
-
         self.mainloop()
 
-    def buttons(self):
-        calculate = Image.open('assets\\calculate.png')
-        calculate = ImageTk.PhotoImage(calculate)
-        notepad = Image.open('assets\\notepad.png')
-        notepad = ImageTk.PhotoImage(notepad)
-        functions = Image.open('assets\\functions.png')
-        functions = ImageTk.PhotoImage(functions)
+            
+        #tk.Button(self, image=NotepadImage, command=lambda: calculator.generate(self), width=150, height=200).grid(row=0, column=1, padx=0, pady=10)
+        #tk.Button(self, image=FunctionsImage, command=lambda: calculator.generate(self), width=150, height=200).grid(row=0, column=2, padx=10, pady=10)
 
-        MenuButton(self, calculate, lambda: calculator.generate(self), 150, 200).grid(row=0, column=0, padx=10, pady=10)
-        MenuButton(self, notepad, lambda: calculator.generate(self), 150, 200).grid(row=0, column=1, padx=0, pady=10)
-        MenuButton(self, functions, lambda: calculator.generate(self), 150, 200).grid(row=0, column=2, padx=10, pady=10)
+class StartPage(tk.Tk):
+    def __init__(self, title, bg):
+        tk.Tk.__init__(self):
 
 
-class MenuButton(tk.Button):
-    def __init__(self, parent, image, command, width, height):
-        tk.Button.__init__(self, parent, image=image, command=command, width=width, height=height)
-        self.image = image
-        self.command = command
-        self.width = width
-        self.height = height
 
-class ButtonImage():
-    def __init__(self, image):
-        self.image = Image.open(image)
-        self.image = ImageTk.PhotoImage(self.image)
-
-
-App()
+App(TITLE, BGCHOICE)
