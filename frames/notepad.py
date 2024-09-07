@@ -1,6 +1,6 @@
 #############################################################################################
 #   File:       notepad.py                                                                  #                             
-#   Author:                                                                        #                    
+#   Author:     R. Saluja                                                                   #                    
 #   Date:       02/07/2024                                                                  #    
 #   Version:    1.0                                                                         #            
 #                                                                                           #                
@@ -27,7 +27,7 @@ SAVETITLE = "Save"
 LOADTITLE = "Load"
 BGCHOICE = "#353333"
 WIDGETCOLOUR = "#D9D9D9"
-FONT = "Segoe_UI 15"
+FONT = ('Segoe UI', 15)
 
 class Notepad(tk.Toplevel):
     def __init__(self, *args, **kwargs):
@@ -78,7 +78,7 @@ class Notepad(tk.Toplevel):
 
         #########################################################################################
         #   Name:      LoadNote                                                                 #        
-        #   Author:                                                                    #                
+        #   Author:    R. Saluja                                                                #                
         #   Date:      02/07/2024                                                               #        
         #   Version:   1.0                                                                      #            
         #   Input:     None                                                                     #        
@@ -103,7 +103,7 @@ class Notepad(tk.Toplevel):
 
         #########################################################################################
         #   Name:      SaveNote                                                                 #    
-        #   Author:                                                                    #                
+        #   Author:    R. Saluja                                                                #                
         #   Date:      02/07/2024                                                               #            
         #   Version:   1.0                                                                      #    
         #   Input:     None                                                                     #    
@@ -131,14 +131,14 @@ class SaveWindow(Notepad):
         self.note = note
 
         # Load Images
-        FolderImg = tk.PhotoImage(file='assets\\folder.png')
+        FolderImg = tk.PhotoImage(file='assets/folder.png')
 
         # Configure window
         self.title(SAVETITLE)
         self.focus_force()
         self.configure(bg=BGCHOICE)
         self.geometry("400x220")
-        self.iconbitmap("assets\FMLogo.ico")
+        self.iconbitmap("assets/FMLogo.ico")
         self.resizable(False, False)
 
         # Entry for the file name
@@ -171,7 +171,7 @@ class SaveWindow(Notepad):
 
         #########################################################################################
         #   Name:      SaveFile                                                                 #        
-        #   Author:                                                                    #                
+        #   Author:    R. Saluja                                                                #                
         #   Date:      02/07/2024                                                               #            
         #   Version:   1.0                                                                      #            
         #   Input:     None                                                                     #            
@@ -184,7 +184,7 @@ class SaveWindow(Notepad):
         #########################################################################################
         def SaveFile():
             try:
-                with open(f"{LocationEntry.get()}\\{FileNameEntry.get()}.txt", "w") as file:
+                with open(f"{LocationEntry.get()}/{FileNameEntry.get()}.txt", "w") as file:
                     file.write(self.note)
                 name.config(text=FileNameEntry.get())
                 self.destroy()
@@ -193,7 +193,7 @@ class SaveWindow(Notepad):
 
         #########################################################################################
         #   Name:      SelectLocation                                                           #                                    
-        #   Author:                                                                    #                                
+        #   Author:    R. Saluja                                                                #                                
         #   Date:      02/07/2024                                                               #                                
         #   Version:   1.0                                                                      #                        
         #   Input:     None                                                                     #                        
@@ -205,14 +205,14 @@ class SaveWindow(Notepad):
         #   entry to the selected location.                                                     #                                        
         #########################################################################################
         def SelectLocation():
-            Location = filedialog.askdirectory(initialdir="\\notes", title="Select a location")
+            Location = filedialog.askdirectory(initialdir="./notes", title="Select a location")
             LocationEntry.config(fg="black")
             LocationEntry.delete(0, "end")
             LocationEntry.insert(0, Location)
 
         #########################################################################################
         #   Name:      FocusEntry                                                               #
-        #   Author:                                                                    #      
+        #   Author:    R. Saluja                                                                #      
         #   Date:      02/07/2024                                                               #         
         #   Version:   1.0                                                                      #    
         #   Input:     Object: Entry (The entry to be modified)                                 #                                 
@@ -230,7 +230,7 @@ class SaveWindow(Notepad):
 
         #########################################################################################
         #   Name:      UnfocusEntry                                                             #
-        #   Author:                                                                    #
+        #   Author:    R. Saluja                                                                #
         #   Date:      02/07/2024                                                               #
         #   Version:   1.0                                                                      #
         #   Input:     Object: Entry (The entry to be modified)                                 #

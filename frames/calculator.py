@@ -8,6 +8,15 @@ import tkinter as tk
 # code needs to be commented
 # unable to open files with the calculator currently
 
+# how to fix the calculator multiple decimals
+"""
+myList = [
+    first: "num1"
+    second: "operand"
+    third: "num2"
+]
+"""
+
 # Constants
 MAINTITLE = "Calculator"
 BGCHOICE = "#353333"
@@ -15,7 +24,7 @@ WIDGETCOLOUR = "#D9D9D9"
 FUNCWIDGET = "#CDBC9A"
 NUMWIDGET = "#5F6465"
 ANSWIDGET = "#D1A9D4"
-FONT = "Segoe_UI 20"
+FONT = ('Segoe UI', 20)
 
 class Calculator(tk.Toplevel):
     def __init__(self, *args, **kwargs):
@@ -26,7 +35,7 @@ class Calculator(tk.Toplevel):
         self.focus_force()
         self.configure(bg=BGCHOICE)
         self.geometry("450x500")
-        self.iconbitmap("assets\FMLogo.ico")
+        self.iconbitmap("assets/FMLogo.ico")
         self.resizable(False, False)
 
         # Create display
@@ -59,33 +68,33 @@ class Calculator(tk.Toplevel):
         Button(self, "func", "add", text="^").place(x=230, y=100, width=100, height=70)
         Button(self, "func", "add", text="+").place(x=340, y=100, width=100, height=70)
 
+        display = self.TopDisplay
 
-        
         # Bindings
-        self.bind("<Return>", lambda event: Calculator.calculate(Calculator, self.display))
-        self.bind("<BackSpace>", lambda event: Calculator.delete(Calculator, self.display))
+        self.bind("<Return>", lambda event: Calculator.calculate(Calculator, self.TopDisplay))
+        self.bind("<BackSpace>", lambda event: Calculator.delete(Calculator, self.TopDisplay))
 
         self.bind("<Escape>", lambda event: [self.destroy(), self.master.deiconify()])
 
         # bind the numbers on the keyboard
-        self.bind("<KeyPress-0>", lambda event: Calculator.add_to_display(Calculator, self.display, "0"))
-        self.bind("<KeyPress-1>", lambda event: Calculator.add_to_display(Calculator, self.display, "1"))
-        self.bind("<KeyPress-2>", lambda event: Calculator.add_to_display(Calculator, self.display, "2"))
-        self.bind("<KeyPress-3>", lambda event: Calculator.add_to_display(Calculator, self.display, "3"))
-        self.bind("<KeyPress-4>", lambda event: Calculator.add_to_display(Calculator, self.display, "4"))
-        self.bind("<KeyPress-5>", lambda event: Calculator.add_to_display(Calculator, self.display, "5"))
-        self.bind("<KeyPress-6>", lambda event: Calculator.add_to_display(Calculator, self.display, "6"))
-        self.bind("<KeyPress-7>", lambda event: Calculator.add_to_display(Calculator, self.display, "7"))
-        self.bind("<KeyPress-8>", lambda event: Calculator.add_to_display(Calculator, self.display, "8"))
-        self.bind("<KeyPress-9>", lambda event: Calculator.add_to_display(Calculator, self.display, "9"))
-        self.bind("<KeyPress-period>", lambda event: Calculator.add_to_display(Calculator, self.display, "."))
-        self.bind("<KeyPress-plus>", lambda event: Calculator.add_to_display(Calculator, self.display, "+"))
-        self.bind("<KeyPress-minus>", lambda event: Calculator.add_to_display(Calculator, self.display, "-"))
-        self.bind("<KeyPress-asterisk>", lambda event: Calculator.add_to_display(Calculator, self.display, "*"))
-        self.bind("<KeyPress-slash>", lambda event: Calculator.add_to_display(Calculator, self.display, "/"))
-        self.bind("<KeyPress-asciicircum>", lambda event: Calculator.add_to_display(Calculator, self.display, "^"))
-        self.bind("<KeyPress-Return>", lambda event: Calculator.calculate(Calculator, self.display))
-        self.bind("<KeyPress-BackSpace>", lambda event: Calculator.delete(Calculator, self.display))
+        self.bind("<KeyPress-0>", lambda event: Calculator.add_to_display(Calculator, self.TopDisplay, "0"))
+        self.bind("<KeyPress-1>", lambda event: Calculator.add_to_display(Calculator, self.TopDisplay, "1"))
+        self.bind("<KeyPress-2>", lambda event: Calculator.add_to_display(Calculator, self.TopDisplay, "2"))
+        self.bind("<KeyPress-3>", lambda event: Calculator.add_to_display(Calculator, self.TopDisplay, "3"))
+        self.bind("<KeyPress-4>", lambda event: Calculator.add_to_display(Calculator, self.TopDisplay, "4"))
+        self.bind("<KeyPress-5>", lambda event: Calculator.add_to_display(Calculator, self.TopDisplay, "5"))
+        self.bind("<KeyPress-6>", lambda event: Calculator.add_to_display(Calculator, self.TopDisplay, "6"))
+        self.bind("<KeyPress-7>", lambda event: Calculator.add_to_display(Calculator, self.TopDisplay, "7"))
+        self.bind("<KeyPress-8>", lambda event: Calculator.add_to_display(Calculator, self.TopDisplay, "8"))
+        self.bind("<KeyPress-9>", lambda event: Calculator.add_to_display(Calculator, self.TopDisplay, "9"))
+        self.bind("<KeyPress-period>", lambda event: Calculator.add_to_display(Calculator, self.TopDisplay, "."))
+        self.bind("<KeyPress-plus>", lambda event: Calculator.add_to_display(Calculator, self.TopDisplay, "+"))
+        self.bind("<KeyPress-minus>", lambda event: Calculator.add_to_display(Calculator, self.TopDisplay, "-"))
+        self.bind("<KeyPress-asterisk>", lambda event: Calculator.add_to_display(Calculator, self.TopDisplay, "*"))
+        self.bind("<KeyPress-slash>", lambda event: Calculator.add_to_display(Calculator, self.TopDisplay, "/"))
+        self.bind("<KeyPress-asciicircum>", lambda event: Calculator.add_to_display(Calculator, self.TopDisplay, "^"))
+        self.bind("<KeyPress-Return>", lambda event: Calculator.calculate(Calculator, self.TopDisplay))
+        self.bind("<KeyPress-BackSpace>", lambda event: Calculator.delete(Calculator, self.TopDisplay))
 
 
 
@@ -156,15 +165,15 @@ class Button(tk.Button):
             self.configure(bg=ANSWIDGET, activebackground=ANSWIDGET)
 
         if cmd == "sign":
-            self.configure(command=lambda: Calculator.change_sign(Calculator, self.master.display))
+            self.configure(command=lambda: Calculator.change_sign(Calculator, self.master.TopDisplay))
         elif cmd == "clear":
-            self.configure(command=lambda: Calculator.clear(Calculator, self.master.display))
+            self.configure(command=lambda: Calculator.clear(Calculator, self.master.TopDisplay))
         elif cmd == "calculate":
-            self.configure(command=lambda: Calculator.calculate(Calculator, self.master.display))
+            self.configure(command=lambda: Calculator.calculate(Calculator, self.master.TopDisplay))
         elif cmd == "add":
-            self.configure(command=lambda: Calculator.add_to_display(Calculator, self.master.display, self["text"]))
+            self.configure(command=lambda: Calculator.add_to_display(Calculator, self.master.TopDisplay, self["text"]))
         elif cmd == "del":
-            self.configure(command=lambda: Calculator.delete(Calculator, self.master.display))
+            self.configure(command=lambda: Calculator.delete(Calculator, self.master.TopDisplay))
 
 
 

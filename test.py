@@ -1,42 +1,40 @@
-import matplotlib
-import matplotlib.pyplot as plt
+from tkinter import *
+from tkinter import font
 
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
-matplotlib.use('TkAgg')
+root = Tk()
+root.title('Font Families')
+fonts=list(font.families())
+fonts.sort()
 
-import tkinter as tk
+def populate(frame):
+    '''Put in the fonts'''
+    listnumber = 1
+    for i, item in enumerate(fonts):
+        label = "listlabel" + str(listnumber)
+        label = Label(frame,text=item,font=(item, 16))
+        label.grid(row=i)
+        label.bind("<Button-1>",lambda e,item=item:copy_to_clipboard(item))
+        listnumber += 1
 
-def graph(event=None):
-    tmptext = entry.get()
-    tmptext = "$"+tmptext+"$"
+def copy_to_clipboard(item):
+    root.clipboard_clear()
+    root.clipboard_append("font=('" + item.lstrip('@') + "', 12)")
 
-    ax.clear()
-    ax.text(0.2, 0.6, tmptext, fontsize=50)  
-    canvas.draw()
+def onFrameConfigure(canvas):
+    '''Reset the scroll region to encompass the inner frame'''
+    canvas.configure(scrollregion=canvas.bbox("all"))
 
-root = tk.Tk()
+canvas = Canvas(root, borderwidth=0, background="#ffffff")
+frame = Frame(canvas, background="#ffffff")
+vsb = Scrollbar(root, orient="vertical", command=canvas.yview)
+canvas.configure(yscrollcommand=vsb.set)
 
-mainframe = tk.Frame(root)
-mainframe.pack()
+vsb.pack(side="right", fill="y")
+canvas.pack(side="left", fill="both", expand=True)
+canvas.create_window((4,4), window=frame, anchor="nw")
 
-entry = tk.Entry(mainframe, width=70)
-entry.pack()
+frame.bind("<Configure>", lambda event, canvas=canvas: onFrameConfigure(canvas))
 
-label = tk.Label(mainframe)
-label.pack()
+populate(frame)
 
-fig = matplotlib.figure.Figure(figsize=(5, 4), dpi=100)
-ax = fig.add_subplot(111)
-
-canvas = FigureCanvasTkAgg(fig, master=label)
-canvas.get_tk_widget().pack(side="top", fill="both", expand=True)
-canvas._tkcanvas.pack(side="top", fill="both", expand=True)
-
-# ax.get_xaxis().set_visible(False)
-# ax.get_yaxis().set_visible(False)
-
-entry.insert(0, r"\sum_{i=0}^\infty x_i \frac{y_i}{z_i}")
-graph()
-
-root.bind("<Return>", graph)
 root.mainloop()
