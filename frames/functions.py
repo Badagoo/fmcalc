@@ -1,7 +1,8 @@
 import tkinter as tk
 from tkinter import messagebox
 
-
+def PaymentError():
+    messagebox.showerror("Payment Error", "Subscribe to access this feature!")
 
 MAINTITLE = "Functions"
 FUNC1 = "Determinant"
@@ -17,7 +18,7 @@ class FunctionsController(tk.Toplevel):
         tk.Toplevel.__init__(self, *args, **kwargs)
 
         self.title(MAINTITLE)
-        self.geometry("375x375")
+        self.geometry("375x400")
         self.iconbitmap("assets\FMLogo.ico")
         self.resizable(False, False)
         self.focus_force()
@@ -50,51 +51,37 @@ class Determinant(tk.Frame):
     def __init__(self, parent):
         tk.Frame.__init__(self, parent)
 
-        self.configure(width=375, height=375, bg=BGCHOICE)
+        self.configure(width=375, height=400, bg=BGCHOICE)
 
         tk.Label(self, text="Enter the values of the matrix", font=FONT, bg=WIDGETCOLOUR).place(x=25, y=25, width=325, height=30)
 
-        self.InputA = tk.Entry(self, font=FONT, bg=WIDGETCOLOUR, bd=0)
+        self.InputA = tk.Entry(self, font=FONT, bg=WIDGETCOLOUR, bd=0, justify='center')
         self.InputA.place(x=75, y=75, width=100, height=100)
-        self.InputB = tk.Entry(self, font=FONT, bg=WIDGETCOLOUR, bd=0)
+        self.InputB = tk.Entry(self, font=FONT, bg=WIDGETCOLOUR, bd=0, justify='center')
         self.InputB.place(x=200, y=75, width=100, height=100)
-        self.InputC = tk.Entry(self, font=FONT, bg=WIDGETCOLOUR, bd=0)
+        self.InputC = tk.Entry(self, font=FONT, bg=WIDGETCOLOUR, bd=0, justify='center')
         self.InputC.place(x=75, y=200, width=100, height=100)
-        self.InputD = tk.Entry(self, font=FONT, bg=WIDGETCOLOUR, bd=0)
+        self.InputD = tk.Entry(self, font=FONT, bg=WIDGETCOLOUR, bd=0, justify='center')
         self.InputD.place(x=200, y=200, width=100, height=100)
 
         tk.Button(self, text="solve", font=FONT, bg=WIDGETCOLOUR, command=self.solvedet).place(x=25, y=325, width=325, height=30)
 
     def solvedet(self):
         placeholder = ( int(self.InputA.get()) * int(self.InputD.get()) ) - ( int(self.InputB.get()) * int(self.InputC.get()) )
-        tk.Label(self, text=placeholder, font=FONT, bg=WIDGETCOLOUR).grid(row=4, column=0)
+        tk.Label(self, text=placeholder, font=FONT, bg=BGCHOICE).place(x=25, y=370, width=325, height=20)
 
 class Finance(tk.Frame):
     def __init__(self, parent):
         tk.Frame.__init__(self, parent)
 
-        
-
 class BoxPlot(tk.Frame):
     def __init__(self, parent):
-        tk.Frame.__init__(self, parent)
-
-        tk.Label(self, text="Box Plot", font=FONT, bg=BGCHOICE, fg="white").grid(row=0, column=0, padx=15, pady=10)
-        self.data = tk.Entry(self, font=FONT, bg=BGCHOICE).grid(row=1, column=0, padx=15, pady=10)
-
-        tk.Button(self, text="generate", font=FONT, bg=WIDGETCOLOUR).grid(row=0, column=1, pady=10)
-
-
+        tk.Frame.__init__(self, parent)    
 
 class StandardisedScores(tk.Frame):
     def __init__(self, parent):
         tk.Frame.__init__(self, parent)
 
-        label = tk.Label(self, text="Regression", font=FONT, bg=BGCHOICE, fg="white")
-        label.grid(row=0, column=0, pady=10)
-
-        Button1 = tk.Button(self, text="Back", font=FONT, bg=WIDGETCOLOUR, command=lambda: parent.show_frame(SelectScreen))
-        Button1.grid(row=1, column=0, pady=10)
 
 class Button(tk.Button):
     def __init__(self, parent, controller, cmd, *args, **kwargs):
@@ -108,13 +95,13 @@ class Button(tk.Button):
             self.configure(command=lambda: controller.show_frame(Determinant))
             self["text"] = FUNC1
         elif cmd == FUNC2:
-            self.configure(command=lambda: controller.show_frame(Finance))
+            self.configure(command=lambda: PaymentError())
             self["text"] = FUNC2
         elif cmd == FUNC3:
-            self.configure(command=lambda: controller.show_frame(BoxPlot))
+            self.configure(command=lambda: PaymentError())
             self["text"] = FUNC3
         elif cmd == FUNC4:
-            self.configure(command=lambda: controller.show_frame(StandardisedScores))
+            self.configure(command=lambda: PaymentError())
             self["text"] = FUNC4
 
 def generate(root):
@@ -122,5 +109,3 @@ def generate(root):
     root.withdraw()
     FunctionsWindow.protocol("WM_DELETE_WINDOW", lambda: [FunctionsWindow.destroy(), root.deiconify()])
 
-def PaymentError():
-    messagebox.showerror("Payment Error", "Subscribe to access this feature!")
