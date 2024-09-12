@@ -49,27 +49,29 @@ class App(tk.Tk):
                                     borderwidth=0,
                                     bg=BUTTONCOLOUR,
                                     image=CalculateImg,
-                                    command=lambda: calculator.generate(self))
+                                    command=lambda: calculator.Generate(self))
         CalculatorButton.image = CalculateImg # call this to prevent garbage collection
 
         NotepadButton = tk.Button(self,
                                     borderwidth=0,
                                     bg=BUTTONCOLOUR,
                                     image=NotepadImg,
-                                    command=lambda: notepad.generate(self))
+                                    command=lambda: notepad.Generate(self))
         NotepadButton.image = NotepadImg # call this to prevent garbage collection
 
         FunctionsButton = tk.Button(self,
                                     borderwidth=0,
                                     bg=BUTTONCOLOUR,
                                     image=FunctionsImg,
-                                    command=lambda: functions.generate(self))
+                                    command=lambda: functions.Generate(self))
         FunctionsButton.image = FunctionsImg # call this to prevent garbage collection
 
         # Place buttons on the screen
         CalculatorButton.place(x=25, y=25, width=180, height=300)
         NotepadButton.place(x=235, y=25, width=180, height=300)
         FunctionsButton.place(x=450, y=25, width=180, height=300)
+
+        tk.Label(self, text="* press esc or close the window to return back to this page! *", justify="center", bg=BGCHOICE, fg="white").place(x=0, y=330, width=650, height=20)
 
 # Driver Code
 App().mainloop()

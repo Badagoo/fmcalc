@@ -247,7 +247,20 @@ class SaveWindow(Notepad):
                 Object.insert(0, Text)
                 Object.config(fg="grey")
 
-def generate(root):
+
+#########################################################################################
+#   Name:      Generate                                                                 #        
+#   Author:    R. Saluja                                                                #                
+#   Date:      03/08/2024                                                               #        
+#   Version:   1.0                                                                      #            
+#   Input:     none                                                                     #        
+#   Output:    opens this window and closes the main window.                            #                        
+#   Return:    None                                                                     #            
+#                                                                                       #    
+#   Function exists to access the features of the notepad window upon the users         #
+#   request.                                                                            #     
+#########################################################################################
+def Generate(root):
     NotepadWindow = Notepad(root)
     root.withdraw()
     NotepadWindow.protocol("WM_DELETE_WINDOW", lambda: [NotepadWindow.destroy(), root.deiconify()])

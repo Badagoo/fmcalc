@@ -1,21 +1,21 @@
+#############################################################################################
+#   File:       calculator.py                                                               #
+#   Author:     R. Saluja                                                                   #
+#   Date:       027/07/2024                                                                 #
+#   Version:    1.0                                                                         #
+#                                                                                           #
+#   Description:                                                                            #
+#   This file creates and runs the calculator window for the FM Calculator application.     #
+#   It creates the window and places down the buttons in the calculator in a conventional   #
+#   calculator grid.                                                                        #
+#                                                                                           #
+#   Naming Conventions:                                                                     #
+#       - Classes: CamelCase (e.g., TkinterApp)                                             #
+#       - Functions: CamelCase (e.g., AddToDisplay)                                         #
+#       - Variables: CamelCase (e.g., FunctionsImg, CalculateButton)                        #
+#############################################################################################
+
 import tkinter as tk
-
-# Current Errors
-# cannot multiply by negatives due to the list in list
-# can have multiple decimals in the same number when you shouldnt be able to
-# some keybinds dont work
-# when an error occurs, the error message sometimes doesnt happen and allows for the entry to be typed in
-# code needs to be commented
-# unable to open files with the calculator currently
-
-# how to fix the calculator multiple decimals
-"""
-myList = [
-    first: "num1"
-    second: "operand"
-    third: "num2"
-]
-"""
 
 # Constants
 MAINTITLE = "Calculator"
@@ -63,43 +63,51 @@ class Calculator(tk.Toplevel):
         Button(self, "num", "add", text="9").place(x=230, y=180, width=100, height=70)
         Button(self, "func", "add", text="-").place(x=340, y=180, width=100, height=70)
 
-        Button(self, "func", "clear", text="C").place(x=10, y=100, width=100, height=70)
+        Button(self, "func", "Clear", text="C").place(x=10, y=100, width=100, height=70)
         Button(self, "func", "del", text="del").place(x=120, y=100, width=100, height=70)
         Button(self, "func", "add", text="^").place(x=230, y=100, width=100, height=70)
         Button(self, "func", "add", text="+").place(x=340, y=100, width=100, height=70)
 
-        display = self.TopDisplay
-
         # Bindings
-        self.bind("<Return>", lambda event: Calculator.calculate(Calculator, self.TopDisplay))
-        self.bind("<BackSpace>", lambda event: Calculator.delete(Calculator, self.TopDisplay))
+        self.bind("<Return>", lambda event: Calculator.Calculate(Calculator, self.TopDisplay))
+        self.bind("<BackSpace>", lambda event: Calculator.Delete(Calculator, self.TopDisplay))
 
         self.bind("<Escape>", lambda event: [self.destroy(), self.master.deiconify()])
 
         # bind the numbers on the keyboard
-        self.bind("<KeyPress-0>", lambda event: Calculator.add_to_display(Calculator, self.TopDisplay, "0"))
-        self.bind("<KeyPress-1>", lambda event: Calculator.add_to_display(Calculator, self.TopDisplay, "1"))
-        self.bind("<KeyPress-2>", lambda event: Calculator.add_to_display(Calculator, self.TopDisplay, "2"))
-        self.bind("<KeyPress-3>", lambda event: Calculator.add_to_display(Calculator, self.TopDisplay, "3"))
-        self.bind("<KeyPress-4>", lambda event: Calculator.add_to_display(Calculator, self.TopDisplay, "4"))
-        self.bind("<KeyPress-5>", lambda event: Calculator.add_to_display(Calculator, self.TopDisplay, "5"))
-        self.bind("<KeyPress-6>", lambda event: Calculator.add_to_display(Calculator, self.TopDisplay, "6"))
-        self.bind("<KeyPress-7>", lambda event: Calculator.add_to_display(Calculator, self.TopDisplay, "7"))
-        self.bind("<KeyPress-8>", lambda event: Calculator.add_to_display(Calculator, self.TopDisplay, "8"))
-        self.bind("<KeyPress-9>", lambda event: Calculator.add_to_display(Calculator, self.TopDisplay, "9"))
-        self.bind("<KeyPress-period>", lambda event: Calculator.add_to_display(Calculator, self.TopDisplay, "."))
-        self.bind("<KeyPress-plus>", lambda event: Calculator.add_to_display(Calculator, self.TopDisplay, "+"))
-        self.bind("<KeyPress-minus>", lambda event: Calculator.add_to_display(Calculator, self.TopDisplay, "-"))
-        self.bind("<KeyPress-asterisk>", lambda event: Calculator.add_to_display(Calculator, self.TopDisplay, "*"))
-        self.bind("<KeyPress-slash>", lambda event: Calculator.add_to_display(Calculator, self.TopDisplay, "/"))
-        self.bind("<KeyPress-asciicircum>", lambda event: Calculator.add_to_display(Calculator, self.TopDisplay, "^"))
-        self.bind("<KeyPress-Return>", lambda event: Calculator.calculate(Calculator, self.TopDisplay))
-        self.bind("<KeyPress-BackSpace>", lambda event: Calculator.delete(Calculator, self.TopDisplay))
+        self.bind("<KeyPress-0>", lambda event: Calculator.AddToDisplay(Calculator, self.TopDisplay, "0"))
+        self.bind("<KeyPress-1>", lambda event: Calculator.AddToDisplay(Calculator, self.TopDisplay, "1"))
+        self.bind("<KeyPress-2>", lambda event: Calculator.AddToDisplay(Calculator, self.TopDisplay, "2"))
+        self.bind("<KeyPress-3>", lambda event: Calculator.AddToDisplay(Calculator, self.TopDisplay, "3"))
+        self.bind("<KeyPress-4>", lambda event: Calculator.AddToDisplay(Calculator, self.TopDisplay, "4"))
+        self.bind("<KeyPress-5>", lambda event: Calculator.AddToDisplay(Calculator, self.TopDisplay, "5"))
+        self.bind("<KeyPress-6>", lambda event: Calculator.AddToDisplay(Calculator, self.TopDisplay, "6"))
+        self.bind("<KeyPress-7>", lambda event: Calculator.AddToDisplay(Calculator, self.TopDisplay, "7"))
+        self.bind("<KeyPress-8>", lambda event: Calculator.AddToDisplay(Calculator, self.TopDisplay, "8"))
+        self.bind("<KeyPress-9>", lambda event: Calculator.AddToDisplay(Calculator, self.TopDisplay, "9"))
+        self.bind("<KeyPress-period>", lambda event: Calculator.AddToDisplay(Calculator, self.TopDisplay, "."))
+        self.bind("<KeyPress-plus>", lambda event: Calculator.AddToDisplay(Calculator, self.TopDisplay, "+"))
+        self.bind("<KeyPress-minus>", lambda event: Calculator.AddToDisplay(Calculator, self.TopDisplay, "-"))
+        self.bind("<KeyPress-asterisk>", lambda event: Calculator.AddToDisplay(Calculator, self.TopDisplay, "*"))
+        self.bind("<KeyPress-slash>", lambda event: Calculator.AddToDisplay(Calculator, self.TopDisplay, "/"))
+        self.bind("<KeyPress-asciicircum>", lambda event: Calculator.AddToDisplay(Calculator, self.TopDisplay, "^"))
+        self.bind("<KeyPress-Return>", lambda event: Calculator.Calculate(Calculator, self.TopDisplay))
+        self.bind("<KeyPress-BackSpace>", lambda event: Calculator.Delete(Calculator, self.TopDisplay))
 
 
 
 
-    def add_to_display(self, entry, value):
+    
+    #########################################################################################
+    #   Name:      AddToDisplay                                                             #        
+    #   Author:    R. Saluja                                                                #                
+    #   Date:      27/07/2024                                                               #        
+    #   Version:   1.0                                                                      #            
+    #   Input:     entry                                                                    #        
+    #   Output:    adds the users input the end of the entry with validation included.      #                        
+    #   Return:    None                                                                     #      
+    #########################################################################################
+    def AddToDisplay(self, entry, value):
         entry.configure(state="normal")
 
         if entry.get() == "Error":
@@ -110,13 +118,31 @@ class Calculator(tk.Toplevel):
 
         entry.insert(tk.END, value)
         entry.configure(state="readonly")
-
-    def clear(self, entry):
+    
+    #########################################################################################
+    #   Name:      Clear                                                                    #        
+    #   Author:    R. Saluja                                                                #                
+    #   Date:      27/07/2024                                                               #        
+    #   Version:   1.0                                                                      #            
+    #   Input:     entry                                                                    #        
+    #   Output:    clears the entire entry                                                  #                        
+    #   Return:    None                                                                     #      
+    #########################################################################################
+    def Clear(self, entry):
         entry.configure(state="normal")
         entry.delete(0, tk.END)
         entry.configure(state="readonly")
 
-    def change_sign(self, entry):
+    #########################################################################################
+    #   Name:      ChangeSign                                                               #        
+    #   Author:    R. Saluja                                                                #                
+    #   Date:      27/07/2024                                                               #        
+    #   Version:   1.0                                                                      #            
+    #   Input:     entry                                                                    #        
+    #   Output:    alternates between a + and - at the beginning of the entry               #                        
+    #   Return:    None                                                                     #      
+    #########################################################################################
+    def ChangeSign(self, entry):
         entry.configure(state="normal")
         if entry.get()[0] == "-":
             entry.delete(0)
@@ -124,12 +150,30 @@ class Calculator(tk.Toplevel):
             entry.insert(0, "-")
         entry.configure(state="readonly")
     
-    def delete(self, entry):
+    #########################################################################################
+    #   Name:      Delete                                                                   #        
+    #   Author:    R. Saluja                                                                #                
+    #   Date:      27/07/2024                                                               #        
+    #   Version:   1.0                                                                      #            
+    #   Input:     entry                                                                    #        
+    #   Output:    deletes the last thing the user inputted into the entry                  #                        
+    #   Return:    None                                                                     #      
+    #########################################################################################
+    def Delete(self, entry):
         entry.configure(state="normal")
         entry.delete(len(entry.get()) - 1)
         entry.configure(state="readonly")
 
-    def calculate(self, entry):
+    #########################################################################################
+    #   Name:      Calculate                                                                #        
+    #   Author:    R. Saluja                                                                #                
+    #   Date:      27/07/2024                                                               #        
+    #   Version:   1.0                                                                      #            
+    #   Input:     entry                                                                    #        
+    #   Output:    changes the entry to the answer of the input provided or an error.       #                        
+    #   Return:    None                                                                     #      
+    #########################################################################################
+    def Calculate(self, entry):
         try:
             expression = entry.get()
             expression = expression.replace("^", "**")
@@ -165,19 +209,30 @@ class Button(tk.Button):
             self.configure(bg=ANSWIDGET, activebackground=ANSWIDGET)
 
         if cmd == "sign":
-            self.configure(command=lambda: Calculator.change_sign(Calculator, self.master.TopDisplay))
-        elif cmd == "clear":
-            self.configure(command=lambda: Calculator.clear(Calculator, self.master.TopDisplay))
+            self.configure(command=lambda: Calculator.ChangeSign(Calculator, self.master.TopDisplay))
+        elif cmd == "Clear":
+            self.configure(command=lambda: Calculator.Clear(Calculator, self.master.TopDisplay))
         elif cmd == "calculate":
-            self.configure(command=lambda: Calculator.calculate(Calculator, self.master.TopDisplay))
+            self.configure(command=lambda: Calculator.Calculate(Calculator, self.master.TopDisplay))
         elif cmd == "add":
-            self.configure(command=lambda: Calculator.add_to_display(Calculator, self.master.TopDisplay, self["text"]))
+            self.configure(command=lambda: Calculator.AddToDisplay(Calculator, self.master.TopDisplay, self["text"]))
         elif cmd == "del":
-            self.configure(command=lambda: Calculator.delete(Calculator, self.master.TopDisplay))
+            self.configure(command=lambda: Calculator.Delete(Calculator, self.master.TopDisplay))
 
 
-
-def generate(root):
+#########################################################################################
+#   Name:      Generate                                                                 #        
+#   Author:    R. Saluja                                                                #                
+#   Date:      03/08/2024                                                               #        
+#   Version:   1.0                                                                      #            
+#   Input:     none                                                                     #        
+#   Output:    opens this window and closes the main window.                            #                        
+#   Return:    None                                                                     #            
+#                                                                                       #    
+#   Function exists to access the features of the calculator window upon the users      #
+#   request.                                                                            #     
+#########################################################################################
+def Generate(root):
     CalculatorWindow = Calculator(root)
     root.withdraw()
     CalculatorWindow.protocol("WM_DELETE_WINDOW", lambda: [CalculatorWindow.destroy(), root.deiconify()])
