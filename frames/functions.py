@@ -51,6 +51,7 @@ class FunctionsController(tk.Toplevel):
         self.iconbitmap("assets\FMLogo.ico")
         self.resizable(False, False)
         self.focus_force()
+        self.bind("<Escape>", lambda event: [self.destroy(), self.master.deiconify()])
 
         self.frames = {}
 
