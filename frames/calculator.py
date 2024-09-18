@@ -34,7 +34,7 @@ class Calculator(tk.Toplevel):
         self.title(MAINTITLE)
         self.focus_force()
         self.configure(bg=BGCHOICE)
-        self.geometry("450x500")
+        self.geometry("450x530")
         self.iconbitmap("assets/FMLogo.ico")
         self.resizable(False, False)
 
@@ -67,6 +67,9 @@ class Calculator(tk.Toplevel):
         Button(self, "func", "del", text="del").place(x=120, y=100, width=100, height=70)
         Button(self, "func", "add", text="^").place(x=230, y=100, width=100, height=70)
         Button(self, "func", "add", text="+").place(x=340, y=100, width=100, height=70)
+
+        tk.Label(self, text="* you can use your keyboard to input too! *", justify="center", bg=BGCHOICE, fg="white").place(x=0, y=495, width=450, height=20)
+        tk.Label(self, text="* press esc or close the window to return back to the homepage! *", justify="center", bg=BGCHOICE, fg="white").place(x=0, y=510, width=450, height=20)
 
         # Bindings
         self.bind("<Return>", lambda event: Calculator.Calculate(Calculator, self.TopDisplay))

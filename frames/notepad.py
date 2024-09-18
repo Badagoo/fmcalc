@@ -20,6 +20,7 @@
 
 import tkinter as tk
 from tkinter import filedialog
+from tkinter import messagebox
 
 # Constants
 MAINTITLE = "Notepad"
@@ -96,10 +97,6 @@ class Notepad(tk.Toplevel):
                 self.TextArea.delete("1.0", "end")
                 self.TextArea.insert("1.0", content)
                 TitleBar.config(text=file.name.split("/")[-1][:-4])
-
-                # Get the location of the file for saving later if necessary
-                CurrentLocation = file.name
-                CurrentLocation = CurrentLocation.replace(file.name.split("/")[-1], "")
 
         #########################################################################################
         #   Name:      SaveNote                                                                 #    
@@ -189,7 +186,7 @@ class SaveWindow(Notepad):
                 name.config(text=FileNameEntry.get())
                 self.destroy()
             except FileNotFoundError:
-                pass
+                messagebox.showerror("Value Error", "Make sure the directory you chose is valid.\n Press the folder icon to select one.")
 
         #########################################################################################
         #   Name:      SelectLocation                                                           #                                    

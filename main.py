@@ -21,6 +21,7 @@ import frames.calculator as calculator
 import frames.notepad as notepad
 import frames.functions as functions
 
+from tktooltip import ToolTip
 # constants
 TITLE = "FM CALCULATOR"
 BGCHOICE = "#353333"
@@ -70,6 +71,9 @@ class App(tk.Tk):
         CalculatorButton.place(x=25, y=25, width=180, height=300)
         NotepadButton.place(x=235, y=25, width=180, height=300)
         FunctionsButton.place(x=450, y=25, width=180, height=300)
+        ToolTip(CalculatorButton, "Calculator")
+        ToolTip(NotepadButton, "Notepad")
+        ToolTip(FunctionsButton, "Functions")
 
         tk.Label(self, text="* press esc or close the window to return back to this page! *", justify="center", bg=BGCHOICE, fg="white").place(x=0, y=330, width=650, height=20)
 
