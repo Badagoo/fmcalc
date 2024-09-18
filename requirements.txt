@@ -1,2 +1,1 @@
-tkinter
-tkinter-tooltips
+tkinter-tooltip
